@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    networks:
+      - main_network
+    environment:
+      TG_TOKEN: $TG_TOKEN
+      TG_CHAT_ID: $TG_CHAT_ID
+
+  redis:
+    image: redis
+    networks:
+      - main_network
+    volumes:
+      - redis_volume:/data
+    ports:
+      - 6379:6379
+
+
+networks:
+   main_network: {}
+volumes:
+   redis_volume: {}
+
